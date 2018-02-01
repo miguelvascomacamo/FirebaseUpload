@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImagesActivity extends AppCompatActivity {
+public class ImagesActivity extends AppCompatActivity implements ImageAdaptar.OnItemClickListener{
 
     private RecyclerView mRecyclerView;
     private ImageAdaptar mAdaptar;
@@ -51,6 +51,8 @@ public class ImagesActivity extends AppCompatActivity {
                 mAdaptar = new ImageAdaptar(ImagesActivity.this, mUploads);
                 mRecyclerView.setAdapter(mAdaptar);
 
+                mAdaptar.setOnItemClickListener(ImagesActivity.this);
+
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
 
@@ -60,5 +62,20 @@ public class ImagesActivity extends AppCompatActivity {
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
+    }
+
+    @Override
+    public void onitemClick(int position) {
+        Toast.makeText(this, "Normal click at position: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onWhatClick(int position) {
+        Toast.makeText(this, "whatever click at position: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        Toast.makeText(this, "Delete click at position: " + position, Toast.LENGTH_SHORT).show();
     }
 }
